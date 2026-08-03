@@ -61,7 +61,7 @@ router.get('/refresh', asyncHandler(async (req, res) => {
         })
     }
 
-    await revokeRefreshToken(tokenNoBanco)
+    await revokeRefreshToken(token)
 
     const novoRefreshToken = gerarRefreshToken()
     const novoAccessToken = gerarAccessToken({id: tokenNoBanco.usuario_id})

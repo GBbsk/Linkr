@@ -4,14 +4,9 @@ const crypto = require('crypto')
 const JWT = require('jsonwebtoken')
 
 const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET
-const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET
 
 if(!ACCESS_SECRET || ACCESS_SECRET.length < 32){
     throw new Error('JWT_ACCESS_SECRET invalido ou ausente (minimo 32 caracteres)')
-}
-
-if(!REFRESH_SECRET || REFRESH_SECRET.length < 32){
-    throw new Error('JWT_REFRESH_SECRET invalido ou ausente (minimo 32 caracteres)')
 }
 
 const gerarAccessToken = (usuario) => {

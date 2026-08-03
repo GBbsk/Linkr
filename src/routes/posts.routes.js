@@ -11,7 +11,7 @@ const asyncHandler = require('../middlewares/asyncHandler')
 const router = Router()
 
 router.get('/', async (req, res) => {
-	const resultado = await postsService.buscarPosts(req.body)
+	const resultado = await postsService.buscarPosts({ ...req.query, ...req.body })
 
 	res.json(resultado)
 })

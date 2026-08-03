@@ -6,9 +6,9 @@ const { validarForcaSenha, hashSenha, verificarSenhaHash, fakeBcryptDelay } = re
 const { saveRefreshToken, revokeRefreshToken } = require('../repositories/refresh-token.repository')
 const { criarUsuario, buscarEmail } = require('../repositories/auth.repository')
 const { ref } = require('process')
+const { AppError } = require('../utils/appError')
 
 const registrarUsuario = async (usuario) => {
-    try {
         const { nome, email, senha } = usuario
     
         if(!nome || !email || !senha){
@@ -18,7 +18,7 @@ const registrarUsuario = async (usuario) => {
         const verificarSenha = validarForcaSenha(senha)
     
         if(verificarSenha.length > 0){
-            throw new Error(`SENHA_FRACA: ${verificarSenha.join(', ')}`)
+            throw new AppError('SENHA_FRACA', verificarSenha)
         };
     
         const senhaHash = await hashSenha(senha)
@@ -35,10 +35,6 @@ const registrarUsuario = async (usuario) => {
         await saveRefreshToken(novoUsuario.id, refreshToken)
     
         return { novoUsuario, accessToken, refreshToken }
-    } catch (error) {
-        throw error
-    }
-    
 }
 
 const fazerLogin = async (dados) => {
@@ -79,8 +75,6 @@ const logout = async (refreshToken) => {
 
     return true
 }
-
-
 
 module.exports = {
     registrarUsuario,

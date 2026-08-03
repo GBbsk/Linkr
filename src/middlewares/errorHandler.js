@@ -1,5 +1,6 @@
 const errorHandler = (error, req, res, next) => {
     try {
+        const errorCode = error.code || error.message
         const errorMaping = {
             'NOME_EMAIL_SENHA_FALTANDO': {status: 400, msg: 'Nome, email e senha são campos obrigatórios!'},
             'EMAIL_JA_EXISTE': { status: 409, msg: 'Este e-mail já está em uso. Tente recuperar a senha.' }, 
@@ -8,16 +9,18 @@ const errorHandler = (error, req, res, next) => {
             'REFRESH_TOKEN_INVALIDO': {status: 400, msg: 'Erro ao fazer logout, refresh token invalido'},
             'USERNAME_JA_EXISTE': { status: 409, msg: 'Este nome de usuário já foi escolhido. Tente outro.' },
             'NAO_FOI_POSSIVEL_FAZER_O_LOGOUT': {status: 400, msg: 'Erro ao fazer logout, tente novamente mais tarde!'},
+            'SENHA_FRACA': {status: 401, msg: 'Senha fraca.'}
         }
         
-        if(errorMaping[error.message]){
-            const errorDetail = errorMaping[error.message]
-            return res.status(errorDetail.status).json({ erro: errorDetail.msg })
+        if(errorMaping[errorCode]){
+            const errorDetail = errorMaping[errorCode]
+            const mensagem = Array.isArray(error.detalhes)
+                ? error.detalhes.join(' ')
+                : (error.detalhes || errorDetail.msg)
+
+            return res.status(errorDetail.status).json({ erro: mensagem })
         }
         
-        if (typeof error?.message === 'string' && error.message.startsWith('SENHA_FRACA:')) {
-            return res.status(400).json({ erro: error.message });
-        }
 
         console.error(`[ERRO NÃO MAPEADO] ${error.message}`)
         return res.status(500).json({ erro: 'Erro interno no servidor. Tente novamente mais tarde.' })

@@ -1,5 +1,5 @@
 const { TokenExpiredError } = require('jsonwebtoken');
-const { conectar, desconectar } = require('../databaseFunctions/connectionDB')
+const { conectar, desconectar } = require('../database/connectionDB')
 const crypto = require('crypto')
 
 const criarUsuario = async (id, nome, email, senhaHash) => {

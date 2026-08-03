@@ -1,4 +1,4 @@
-const { conectar, desconectar } = require('../databaseFunctions/connectionDB') 
+const { conectar, desconectar } = require('../database/connectionDB') 
 const { hashSenha } = require('../utils/senha')
 const { gerarTokenOpaco } = require('../utils/jwt')
 const crypto = require('crypto')

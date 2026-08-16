@@ -1,5 +1,5 @@
-const { conectar, desconectar } = require('../databaseFunctions/connectionDB')
-const { executarMigrations } = require('../databaseFunctions/migrations')
+const { conectar, desconectar } = require('../database/connectionDB')
+const { executarMigrations } = require('../database/migrations')
 const { hashSenha } = require('./senha')
 const { registrarUsuario } = require('../services/auth.service');
 

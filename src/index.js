@@ -1,8 +1,8 @@
 const app = require('./app.js')
 require('dotenv').config()
 
-const { executarMigrations } = require('./databaseFunctions/migrations.js')
-const { desconectar } = require('./databaseFunctions/connectionDB.js')
+const { executarMigrations } = require('./database/migrations.js')
+const { desconectar } = require('./database/connectionDB.js')
 
 const servidor = async () => {
 	try {

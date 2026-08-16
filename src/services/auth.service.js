@@ -45,7 +45,7 @@ const fazerLogin = async (dados) => {
     }
 
     const usuario = await buscarEmail(email)
-
+    
     const senhaValida = usuario 
     ? await verificarSenhaHash(senha, usuario.password)
     : await fakeBcryptDelay()
@@ -54,12 +54,14 @@ const fazerLogin = async (dados) => {
         throw new Error('EMAIL_OU_SENHA_INCORRETOS')
     }
     
-    const accessToken = gerarAccessToken(usuario)
-    const refreshToken = gerarRefreshToken(usuario)
+    const { password, ...safeUser } = usuario
+    
+    const accessToken = gerarAccessToken(safeUser)
+    const refreshToken = gerarRefreshToken(safeUser)
 
-    await saveRefreshToken(usuario.id, refreshToken)
+    await saveRefreshToken(safeUser.id, refreshToken)
 
-    return { usuario, accessToken, refreshToken }
+    return { safeUser, accessToken, refreshToken }
 }
 
 const logout = async (refreshToken) => {

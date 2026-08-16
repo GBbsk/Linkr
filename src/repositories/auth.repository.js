@@ -40,7 +40,8 @@ const buscarEmail = async (email) => {
     return {
         id: dados.id,
         name: dados.name,
-        email: dados.email
+        email: dados.email,
+        password: dados.password
     }
 }
 

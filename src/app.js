@@ -1,6 +1,7 @@
 const express = require('express')
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet')
+const cors = require('cors')
 
 const routes = require('./routes/index')
 
@@ -16,6 +17,11 @@ app.use((req, res, next) => {
 	res.set('Cache-Control', 'no-store')
 	next()
 })
+
+app.use(cors({
+  origin: ['http://127.0.0.1:5500', 'http://localhost:3000'],
+  credentials: true
+}))
 
 app.use(helmet())
 app.use(express.json())

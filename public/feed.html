@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Linkr </title>
+    <link rel="stylesheet" href="./css/feed.css">
+</head>
+<body>
+    <div class="info-feed"></div>
+    <section class="head-nav">
+        <nav>
+            <ul>
+                <li class="logo-feed"> <a href="/">Linkr</a></li>
+                <li class="recentes-feed"> <button >Relevantes</button></li>
+                <li class="relevantes-feed"> <button>Recentes</button></li>
+                <li class="search-feed"> <input type="text" placeholder="Pesquisar"></li>
+            </ul>
+        </nav>
+    </section>
+
+    <main class="post-feed">
+        <ol>
+        <!-- Os posts clonados pelo JavaScript aparecerão aqui -->
+        </ol>
+    </main>
+
+    <template id="template-post"> 
+        <li class="post-item">
+            <h2 class="titulo-post-feed"> 
+                <a href=""></a>
+            </h2> 
+            <p class="desc-post-feed"></p>
+            <span class="info-feed-post"></span>
+
+            <div class="acoes-post-feed">
+                <button class="btn-curtir">Curtir</button>
+                <button class="btn-comentar">Comentar</button>
+            </div>
+        </li> 
+    </template>
+
+    <script type="module" src="./pages/feed.js"></script>
+</body>
+</html>

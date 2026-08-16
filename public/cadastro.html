@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login linkr</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section class="card-register"> 
+    <h1>Registrar</h1>
+    <form method="POST">
+        <label>Username</label>
+        <input type="text" name="nome" class="username-cadastro" required minlength="3" maxlength="20" pattern="[a-z0-9_]+"
+        title="Apenas letras minúsculas, números e underscore" placeholder="joao123">
+        
+        <label>Email</label>
+        <input type="email" name="email" placeholder="joao123@gmail.com" required class="email-cadastro">
+        
+        <label>Password</label>
+        <input type="password" name="senha" placeholder="xxxxxxxxx" required minlength="8" class="password-cadastro">
+        <button type="submit" class="cadastrar">Cadastrar</button>
+    </form>
+    </section>
+
+    <div class="loading"></div>
+    <script type="module" src="./pages/cadastro.js"></script>
+</body>
+</html>

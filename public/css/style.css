@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input::placeholder {
+    text-align: left;
+    padding-top: 5px;    
+}
+
+body {
+    background-color: rgb(211, 212, 212);
+}
+
+.card-register {
+    background-color: rgb(231, 231, 231);
+    padding: 30px;
+    border-radius: 15%;
+    width: 80%;
+    max-width: 500px;
+   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-register form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.username-cadastro {
+    padding: 10px;
+    border-radius: 10px
+}
+
+.email-cadastro {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.password-cadastro {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cadastrar {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+    
+}
+
+.card-login {
+    background-color: rgb(231, 231, 231);
+    padding: 30px;
+    border-radius: 15%;
+    width: 80%;
+    max-width: 500px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-login form {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    gap: 15px;
+}
+
+.email-login {
+    margin-top: 5%;
+    padding: 15px;
+    border-radius: 10px;
+}
+.password-login {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.btn-entrar-login {
+    margin-top: 15%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+}
+
+.caixa {
+    width: 200px;
+
+    padding: 20px;
+    padding-left: 50px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 0 auto; /* centraliza horizontalmente*/
+
+    /* Margin em um lado específico 
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px; */
+}
+

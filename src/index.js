@@ -9,7 +9,8 @@ const servidor = async () => {
 		await executarMigrations()
 
 		const iniciar = app.listen(process.env.PORT || 3000, () => {
-			console.log(`[Servidor rodando] http://localhost:${process.env.PORT || 3000}/api/v1/posts`)
+			console.log(`[BACK RODANDO] http://localhost:${process.env.PORT || 3000}/api/v1/posts`)
+			console.log(`[FRONT RODANDO http://localhost:5500]`)
 		})
 
 		const encerrar = async () => {

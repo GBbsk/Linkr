@@ -1,6 +1,6 @@
 import { fazerLogin } from "../js/api/auth.api.js";
 
-const initLogin = () => {
+const initLogin = async () => {
     const emailInput = document.querySelector('.email-login')
     const passwordInput = document.querySelector('.password-login')
     const infoPainel = document.querySelector('.info')
@@ -25,13 +25,18 @@ const initLogin = () => {
         infoPainel.innerHTML = 'Carregando...'
 
         try {
-            const request = await fazerLogin(dados)
-            console.log(request)
-            infoPainel.innerHTML = 'Login realizado com sucesso!'
-            return request
+            const request = await fazerLogin(dados);
+            // console.log(request.accessToken) //
+
+            sessionStorage.setItem('accessToken', request.accessToken)
+            
+            infoPainel.innerHTML = 'Cadastro realizado com sucesso!';
+            
+            window.location.replace('./feed.html')
+            return
         } catch (error) {
-            infoPainel.innerHTML = error.message
-            console.error(error)
+            infoPainel.innerHTML = error.message;
+            console.error(error);
         }
     })
 }

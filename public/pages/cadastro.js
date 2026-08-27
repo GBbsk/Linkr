@@ -27,9 +27,12 @@ const initCadastrar = () => {
 
         try {
             const request = await cadastrarUsuario(dados);
-            console.log(request);
+            sessionStorage.setItem('accessToken', request.accessToken)
+            
             loading.innerHTML = 'Cadastro realizado com sucesso!';
-            return request;
+            
+            window.location.replace('./feed.html')
+            return
         } catch (error) {
             loading.innerHTML = error.message;
             console.error(error);

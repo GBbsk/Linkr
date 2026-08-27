@@ -21,8 +21,6 @@ const cadastrarUsuario = async (dados) => {
 } 
 
 const fazerLogin = async (dados) => {
-    const { email, senha } = dados;
-
     const response = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
         headers: {
@@ -40,7 +38,22 @@ const fazerLogin = async (dados) => {
     return response.json()
 }
 
+const fazerLogout = async () => {
+    const response = await fetch(`${BASE_URL}/logout`, {
+        method: 'POST',
+        credentials: 'include'
+    })
+
+    if(!response.ok){
+        const erro = await response.json();
+        throw new Error(erro.erro || 'Erro ao realizar logout!')
+    }
+
+    return response
+}
+
 export {
     cadastrarUsuario,
-    fazerLogin
+    fazerLogin,
+    fazerLogout
 }

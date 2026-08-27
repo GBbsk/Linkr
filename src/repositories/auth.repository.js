@@ -1,6 +1,6 @@
 const { TokenExpiredError } = require('jsonwebtoken');
 const { conectar, desconectar } = require('../database/connectionDB')
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 const criarUsuario = async (id, nome, email, senhaHash) => {
     try {
@@ -34,14 +34,22 @@ const criarUsuario = async (id, nome, email, senhaHash) => {
 }
 
 const buscarEmail = async (email) => {
-    const db = await conectar();
-    const dados = await db.get('SELECT * FROM usuarios WHERE email = ?', [email]);
-
-    return {
-        id: dados.id,
-        name: dados.name,
-        email: dados.email,
-        password: dados.password
+    try {
+        const db = await conectar();
+        const dados = await db.get('SELECT * FROM usuarios WHERE email = ?', [email]);
+    
+        if(!dados){
+            throw new Error('USUARIO_NAO_EXISTE')
+        }
+    
+        return {
+            id: dados.id,
+            name: dados.name,
+            email: dados.email,
+            password: dados.password
+        }
+    } catch (error) {
+        throw error
     }
 }
 

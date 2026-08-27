@@ -15,7 +15,6 @@ const executarMigrations = async () => {
         criadoEm DATETIME DEFAULT CURRENT_TIMESTAMP
         );
 
-
         CREATE TABLE IF NOT EXISTS posts (
         id  TEXT PRIMARY KEY,
         titulo TEXT NOT NULL,
@@ -27,6 +26,18 @@ const executarMigrations = async () => {
         criadoEm TEXT NOT NULL,
 
         FOREIGN KEY (autor) REFERENCES usuarios(name) ON DELETE CASCADE
+        );
+
+        CREATE TABLE IF NOT EXISTS post_curtidos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT NOT NULL,
+        post_id TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+        UNIQUE (user_id, post_id),
+
+        FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
         );
 
         CREATE TABLE IF NOT EXISTS refresh_tokens (

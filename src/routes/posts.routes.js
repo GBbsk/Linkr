@@ -96,9 +96,11 @@ router.delete('/:id', auth, async (req, res) => {
 	}
 })
 
-router.post('/:id/votar', async (req, res) => {
+router.post('/:id/votar', auth, async (req, res) => {
 	try {
-		const votar = await postsService.votarService(req.post.id)
+		const userID = req.usuario.id
+
+		const votar = await postsService.votarService(req.params.id, userID)
 
 		res.status(200).json(votar)
 	} catch (error) {
@@ -109,7 +111,8 @@ router.post('/:id/votar', async (req, res) => {
 		}
 
 		return res.status(500).json({
-			error: 'Erro interno no servidor, tente novamente mais tarde!'
+			error: 'Erro interno no servidor, tente novamente mais tarde!',
+			codigo: error.message
 		})
 	}
 })

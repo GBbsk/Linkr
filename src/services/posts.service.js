@@ -155,9 +155,9 @@ const deletar = async (id) => {
 	}
 }
 
-const votarService = async (id) => {
+const votarService = async (postID, userID) => {
 	try {
-		const postVotado = await postsRepository.votarRepo(id)
+		const postVotado = await postsRepository.votarRepo(postID, userID)
 
 		if (!postVotado) {
 			throw new Error('ERRO_AO_VOTAR')

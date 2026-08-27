@@ -23,13 +23,13 @@ router.post('/register', asyncHandler(async (req, res) => {
 }))
 
 router.post('/login', asyncHandler(async (req, res) => {
-    const { usuario, refreshToken, accessToken } = await fazerLogin(req.body)
+    const { safeUser, refreshToken, accessToken } = await fazerLogin(req.body)
 
     res.cookie('refreshToken', refreshToken, opcoesRefreshCookie())
 
     res.status(201).json({
         mensagem: 'Usuario logado com sucesso!',
-        usuario,
+        usuario: safeUser,
         accessToken
     })
 }))
@@ -43,7 +43,7 @@ router.post('/logout', asyncHandler(async (req, res) => {
     res.json({ mensagem: 'Logout realizado com sucesso' })
 }))
 
-router.get('/refresh', asyncHandler(async (req, res) => {
+router.post('/refresh', asyncHandler(async (req, res) => {
     const token = req.cookies.refreshToken
 
     if(!token){

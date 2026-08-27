@@ -13,6 +13,12 @@ const auth = (req, res, next) => {
 		}
 	
 		const token = headers.split(' ')[1]
+
+		if (!token) {
+            return res.status(401).json({
+                erro: 'Formato inválido. Use: Bearer <token>'
+            })
+        }
 		
 		const payloadDecodificado = verificarAccessToken(token)
 
@@ -21,7 +27,9 @@ const auth = (req, res, next) => {
 		next()
 	} catch (error) {
 		if(error.name === 'TokenExpiredError'){
-			return res.status(401).json({erro: 'Token expirado, faça login novamente!'})
+			return res.status(401).json({erro: 'Token expirado, faça login novamente!',
+				codigo: 'TOKEN_EXPIRADO'
+			})
 		}
 
 		return res.status(401).json({ erro: 'Token inválido ou adulterado.' });

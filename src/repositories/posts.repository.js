@@ -160,21 +160,30 @@ const deletarPost = async (id) => {
 	}
 }
 
-const votarRepo = async (id) => {
+const votarRepo = async (postID, userID) => {
+	// console.log(`POST ID? ${postID}, USER ID: ${userID}`)
 	try {
 		const db = await conectar()
 
-		const sql = 'UPDATE posts SET votos = votos + 1 WHERE id = ? RETURNING *'
+		const sqlSaveCurtida = 'INSERT INTO post_curtidos (user_id, post_id) VALUES (?, ?)';
+		const sqlCurtir = 'UPDATE posts SET votos = votos + 1 WHERE id = ? RETURNING *';
 
-		const postAtualizado = await db.get(sql, [id])
+		
+		const saveCurtidaDB = await db.run(sqlSaveCurtida, [userID, postID]);
+		const postAtualizado = await db.get(sqlCurtir, [postID]);
 
 		if (!postAtualizado) {
 			return false
 		}
 
+		if(!saveCurtidaDB){
+			return 'ERRO AO SALVAR'
+		}
+
+		console.log(postAtualizado)
 		return postAtualizado
 	} catch (error) {
-		throw new Error('ERRO_AO_VOTAR_BANCO')
+		throw error
 	}
 }
 
